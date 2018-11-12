@@ -3,7 +3,7 @@
 	include '../bibliotheque5/bibliotheque5.inc.php';
 
 	//séparateur tokenisation
-	$separateurs=" \".',«’!?;:&-=+@#{}[]()0123456789";
+	$separateurs = " \".',«’!?;:&-=+@#{}[]()0123456789 ";
 
 	//$source_html = "source.html";
 	$sources_html = array("source.html", "le_parisien.html");
@@ -18,7 +18,7 @@
 	$tab_mots_occurrences = array_count_values($tab_mots);
 	
 	//affichage des resultats de traitement
-	print_tab($tab_mots_occurrences);
+	//print_tab($tab_mots_occurrences);
 
 	// Mise en bdd les resultats de l'indexation 
 	$connexion = mysqli_connect("localhost","root","","tiw");
@@ -40,10 +40,7 @@
 	}
 
 	mysqli_close($connexion); 
-	}
-	
-
-	
+	}	
     
 ?>
 	

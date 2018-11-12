@@ -7,7 +7,7 @@
 	$separateurs=" \".',«’!?;:&-=+@#{}[]()0123456789";
 
 	//fichier html à traiter
-	$source_html = "source.html";
+	$source_html = "../source.html";
 
 	//récuperation de keywords et descriptif
 	$keywords_description = get_metas_keywords_description($source_html);

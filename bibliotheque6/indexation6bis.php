@@ -1,6 +1,6 @@
 <?php
 	// notepad.pw/tiw
-	$source_html = "source.html";
+	$source_html = "../source.html";
 
 	// Affichage du retour de la fonction
 	echo get_body($source_html);

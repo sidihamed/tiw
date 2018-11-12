@@ -3,7 +3,7 @@
 	include '../bibliotheque5/bibliotheque5.inc.php';
 
 	//séparateur tokenisation
-	$separateurs=" \".',«’!?;:&-=+@#{}[]()0123456789";
+	$separateurs = " \".',«’!?;:&-=+@#{}[]()0123456789 ";
 
 	$source_html = "source.html";
 
@@ -28,7 +28,7 @@
 
 		$test = mysqli_query($connexion,$sql); 
 		if ($test) {
-			echo $sql,"<br>";
+			//echo $sql,"<br>";
 		}
 		else{
 			echo "Erreur $sql <br>";
