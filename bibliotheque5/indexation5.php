@@ -1,7 +1,7 @@
 <?php
 
 	//inclusion de fonctions prédefinies
-	include 'bibliotheque5.inc.php';
+	include '../bib_funs.inc.php';
 
 	//séparateur tokenisation
 	$separateurs=" \".',«’!?;:&-=+@#{}[]()0123456789";

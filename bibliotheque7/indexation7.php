@@ -1,11 +1,12 @@
 <?php
-	// notepad.pw/tiw
-	include '../bibliotheque5/bibliotheque5.inc.php';
+	
+	//inclusion de fonctions prédefinies
+	include '../bib_funs.inc.php';
 
 	//séparateur tokenisation
 	$separateurs = " \".',«’!?;:&-=+@#{}[]()0123456789 ";
 
-	$source_html = "source.html";
+	$source_html = "../source.html";
 
 	$texte_body = get_body($source_html);
 
@@ -21,10 +22,10 @@
 	// Mise en bdd les resultats de l'indexation 
 	$connexion = mysqli_connect("localhost","root","","tiw");
 
-	foreach ($tab_mots_occurrences as $mot => $occurrence) {
+	foreach ($tab_mots_occurrences as $mot => $poid) {
 
-		$sql = " insert into source_mot_occ(source,mot,occurrence) 
-		    values ('$source_html','$mot',$occurrence) ";
+		$sql = " insert into source_mot_poid(source,mot,poid) 
+        values('$source_html','$mot',$poid) ";
 
 		$test = mysqli_query($connexion,$sql); 
 		if ($test) {

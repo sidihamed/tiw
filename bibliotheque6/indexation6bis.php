@@ -1,5 +1,5 @@
 <?php
-	// notepad.pw/tiw
+
 	$source_html = "../source.html";
 
 	// Affichage du retour de la fonction
