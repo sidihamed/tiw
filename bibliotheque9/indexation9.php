@@ -3,12 +3,11 @@
 include '../bib_funs.inc.php';
 $source_html ="source.html";
 
-indexer($source_html);
+indexer9($source_html);
 
-function indexer($source)
+function indexer9($source)
 {
-    //séparateur tokenisation
-	$separateurs = " \".',«’!?;:&-=+@#{}[]()0123456789 ";
+    $separateurs = " ,.():!?»«\t\"\n\r\'-+/*%{}[]#0123456789 '’;&@";
 
     //--------------------------1 : traitement de head------------------------------------//
 
@@ -52,7 +51,6 @@ function indexer($source)
     //print_r($tab_fusion);
 
     insert_bdd($tab_mots_poids_doc,$source);
-
 }
 
- ?>
+?>
