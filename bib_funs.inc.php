@@ -1,9 +1,12 @@
 <?php
 
+$separateurs = " ,.():!?»«\t\"\n\r\'-+/*%{}[]#0123456789 '’;&@";
+
+$tab_mots_vides = file('mots-vides.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES); 
 
 function indexer($source)
 {
-	$separateurs = " ,.():!?»«\t\"\n\r\'-+/*%{}[]#0123456789 '’;&@";
+	global $separateurs;
 
     //--------------------------1 : traitement de head------------------------------------//
 
@@ -87,7 +90,6 @@ function poid($tab, $coeff){
         
             $tab[$key] *= $coeff;
         }
-
     return $tab;     
 }
 
@@ -125,39 +127,50 @@ function insert_bdd($tab_mots,$source_html){
 		$chaine_texte_body = preg_match($modele, $html_sans_script, $body);
 
 		// Supprime les balise HTML et PHP
-		$chaine_texte_body = strip_tags($body[1]);
+        $model = '#<[^>]+>#';
+		$chaine_texte_body = preg_replace($model, ' ', $body[1]);
 
 		return $chaine_texte_body;
 	}
 
 	//Extraction des keywords et description des metas html
 	function get_metas_keywords_description($source_html){
+		$chaine_metas = "";
 		//les metas  keywords + description
 		$tab_metas=get_meta_tags($source_html);
-		return $tab_metas["keywords"]." ".$tab_metas["description"];
+		if (isset($tab_metas["keywords"])) 
+            $chaine_metas .= $tab_metas["keywords"];
+		if (isset($tab_metas["description"])) 
+            $chaine_metas .= " " .$tab_metas["description"];
+		return strtolower($chaine_metas);
 	}
 
 	// Extraction de title html
 	function get_title($source_html){
 	    $chaine_html=implode(file ($source_html),"");
 		$modele='/<title>(.*)<\/title>/si';
-		//preg_match  elle cherche modele dans chaine_html est elle va le mettre dans titre
-		preg_match($modele, $chaine_html, $titre);
-		return $titre[1] ;
+		//preg_match  elle cherche modele dans chaine_html est elle va le mettre dans titre[1], titre[0] contient la chaine avec le modele
+		if (preg_match($modele, $chaine_html, $titre))
+			return strtolower($titre[1]);
+		else return "";
 	}
 
 	// Tokenization de la chaine en mot
 	function explode_bis($separateur,$chaine){
-		$tab = array();
+		global $tab_mots_vides;
+        $tab = array();
+
 		$tok =strtok($chaine ,$separateur);
-		
-		if (strlen($tok) > 2) $tab[] =$tok;
+		if (strlen($tok) > 2 and !(in_array($tok, $tab_mots_vides)))
+            $tab[] = $tok;
+
 		while ($tok !== false)
 		{
 		    $tok = strtok($separateur);
-		    if ( strlen($tok) >2) $tab[] = $tok;     
+		    if ( strlen($tok) >2 and !(in_array($tok, $tab_mots_vides))) 
+                $tab[] = $tok;     
 		} 
-		return $tab;
+        return $tab;
 	}
 
 	// Affichage d'un tableau avec indices et valeurs

@@ -4,7 +4,7 @@
 	include '../bib_funs.inc.php';
 
 	//séparateur tokenisation
-	$separateurs=" \".',«’!?;:&-=+@#{}[]()0123456789";
+	global $separateurs;
 
 	//fichier html à traiter
 	$source_html = "../source.html";

@@ -1,13 +1,14 @@
 <?php 
 
 include '../bib_funs.inc.php';
-$source_html ="source.html";
+
+$source_html ="source2.html";
 
 indexer9($source_html);
 
 function indexer9($source)
 {
-    $separateurs = " ,.():!?»«\t\"\n\r\'-+/*%{}[]#0123456789 '’;&@";
+    global $separateurs;
 
     //--------------------------1 : traitement de head------------------------------------//
 
@@ -48,7 +49,7 @@ function indexer9($source)
 
     $tab_mots_poids_doc = fusion_deux_tableaux($tab_head_poid,$tab_body);
 
-    //print_r($tab_fusion);
+    //print_r($tab_mots_poids_doc);
 
     insert_bdd($tab_mots_poids_doc,$source);
 }
