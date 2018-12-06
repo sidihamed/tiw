@@ -5,8 +5,9 @@
 
 	//séparateur tokenisation
 	global $separateurs;
+	global $tab_mots_vides ; 
 
-	$source_html = "../source.html";
+	$source_html = "source.html";
 
 	$texte_body = get_body($source_html);
 
@@ -24,12 +25,12 @@
 
 	foreach ($tab_mots_occurrences as $mot => $poid) {
 
-		$sql = " insert into source_mot_poid(source,mot,poid) 
+		$sql = " insert into source_mot_poids(source,mot,poids) 
         values('$source_html','$mot',$poid) ";
 
 		$test = mysqli_query($connexion,$sql); 
 		if ($test) {
-			//echo $sql,"<br>";
+			echo $sql,"<br>";
 		}
 		else{
 			echo "Erreur $sql <br>";

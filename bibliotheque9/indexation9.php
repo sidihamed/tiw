@@ -2,7 +2,7 @@
 
 include '../bib_funs.inc.php';
 
-$source_html ="source2.html";
+$source_html ="source.html";
 
 indexer9($source_html);
 
@@ -10,15 +10,14 @@ function indexer9($source)
 {
     global $separateurs;
 
-    //--------------------------1 : traitement de head------------------------------------//
-
-    $key_desc = get_metas_keywords_description($source);
-
-    //récupération du titre
-    $title = get_title ($source);
+    //--------------------------1 : traitement de head ---------------------//
+  
+    $title = strtolower(get_title ($source));
+    $keywords = strtolower(get_metas_keywords($source));
+    $description = strtolower(get_metas_description($source));
 
     //unification du texte à traiter
-    $texte_head = strtolower($key_desc. " " .$title);
+    $texte_head = ($title." ".$keywords." ".$description);
 
     //traduction des entités html en ascii
     $texte_head = entitiesHTML2ASCII($texte_head);
@@ -45,13 +44,13 @@ function indexer9($source)
 
     $coeff = 1.5;
 
-    $tab_head_poid = poid($tab_head,$coeff);
+    $tab_head_poids = poids($tab_head,$coeff);
 
-    $tab_mots_poids_doc = fusion_deux_tableaux($tab_head_poid,$tab_body);
+    $tab_mots_poids_doc = fusion_deux_tableaux($tab_head_poids,$tab_body);
 
-    //print_r($tab_mots_poids_doc);
+    print_r($tab_mots_poids_doc);
 
-    insert_bdd($tab_mots_poids_doc,$source);
+    //insert_bdd($tab_mots_poids_doc,$source);
 }
 
 ?>

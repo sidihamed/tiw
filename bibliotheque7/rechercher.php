@@ -4,7 +4,7 @@
 
 	$connexion = mysqli_connect("localhost","root","","tiw");
 		
-	$sql = "select * from source_mot_poid where mot = '$query'";
+	$sql = "select * from source_mot_poids where mot = '$query'";
 
 	$resultat = mysqli_query($connexion,$sql);
 
